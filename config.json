@@ -1,0 +1,27 @@
+{
+  "params" : {
+    "local_server": "True",
+    "local_uri": "mysql://root:@localhost/sharenewsmarket",
+    "prod_uri": "mysql://root:@localhost/sharenewsmarket",
+    "tw_login": "https:twitter.com/sharenewsmarket",
+    "fb_login": "https:facebook.com/sharenewsmarket",
+    "gh_login": "https:github.com/sharenewsmarket",
+    "blog_name": "ShareNewsMarket",
+    "title_copyright": "ShareNewsMarket",
+    "tag_line": "This Blog is how to Earn Money Smartly with ShareMarket",
+    "gmail-username": "youremail@gmail.com",
+    "gmail-password": "Password",
+    "about_text": "hi my name is RituRaj, I am vary excited for the programming and my new job ",
+    "no_of_posts": 2,
+    "login_img": "login-image.svg",
+    "admin_username": "rituraj",
+    "admin_password": "vankhede",
+    "upload_filelocation": "D:\\2021\\WEB DEVLOPMENT PROJECT\\FULL COURSE FLASK\\static"
+
+  }
+
+
+
+
+
+}
