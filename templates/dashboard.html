@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+{% block body %}
+    <body>
+
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{url_for('static', filename='assets/img/home-bg.jpg')}}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Admin Panel</h1>
+                            <h3>Dashboard</h3>
+                            <span class="subheading">Manage Posts and change thame</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css /> -->
+        <div class="container px-8 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-12">
+
+                  <!-- Todo : fetch it for loops form the database -->
+
+
+
+                    <div class="row" style="justify-content: center;" >
+                        <div class="col-md-offset-1 col-md-10">
+                            <div class="panel" style=" margin-right: -14%;; margin-left: -14%;">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col col-sm-3 col-xs-12">
+                                            <h4 class="title">Data <span>List</span></h4>
+                                        </div>
+                                        <div class="col-sm-9 col-xs-12 text-right">
+                                            <div class="btn_group">
+                                                <input type="text" class="form-control" placeholder="Search">
+ 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br>
+
+                                    <!-- <div class="row" > -->
+                                      <div class="panel-body table-responsive">
+                                      <table class="table ">
+                                        <thead>
+                                          <tr>
+                                            <div class="btn_group">
+
+                                              <th> Logout <br>
+                                              <a href="/logout" data-tip="logout"><button class="btn btn-default" title="Logout"><i class="fa fa-sync-logout"></i></button></th></a>
+
+                                              <th>Reload <br>
+                                              <button class="btn btn-default" title="Reload"><i class="fa fa-sync-alt"></i></button></th>
+
+                                            <th>New <span>post </span><br>
+                                             <a  href="/edit/0" data-tip="Create new Post" ><button class="btn btn-default" title="New Post"><i class="fas fa-file-post"></i></button></a>
+                                           </th>
+
+                                             <th>Pdf <span>File</span> <br>
+                                            <button class="btn btn-default" title="Pdf"><i class="fa fa-file-pdf"></i></button>
+                                            </th>
+                                            
+                                            <th>Upload <span>File</span> <br>
+                                              <button class="btn btn-default" title="Upload" ><i class="fas fa-file-pdf"></i></button>
+                                            </th>
+                                            </div>
+                                            
+                                        </tr>
+                                      </thead>
+                                        </table>
+                                      </div>
+
+                                       <br>
+                                    <!-- <div class="row" and file uploader > -->
+                                      <div class="btn_group">
+                                        <form action="/uploader" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                          <input type="file" name="file1" id="file1" class="form-control" placeholder="file upload">
+                                          <button class="btn btn-default" title="submit" style="    font-size: 10px;" ><i class="submit"></i>submit</button>
+
+                                        </form>
+                                      </div>
+                                      
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col col-sm-3 col-xs-12">
+                                            <h4 class="title" style="color: white; ">Edit/Delet File</h4>
+                                        </div>
+                                <div class="panel-body table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>SNO</th>
+                                                <th>Title</th>
+                                                <th>Tagline</th>
+                                                <th>Slug</th>
+                                                <th>Image</th>
+                                                <th>Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <!-- body ke undar jinja for loop lagayege -->
+                                          {% for post in posts %}
+                                            <tr>
+                                              <!-- ye xampp database se laye hai jinja for loo ki help se -->
+                                                <td>{{post.sno}}</td>
+                                                <td>{{post.title}}</td>
+                                                <td>{{post.tagline}}</td>
+                                                <td>{{post.slug}}</td>
+                                                <td>{{post.img_file}}</td>
+                                                <td>{{post.date}}</td>
+                                                <td>
+                                                  <!-- yha par action ko working bnane ke liye 'button tag' ka use nhi karte hue href link ka use kiya hai -->
+                                                  <!-- href='iske undar end-point ke sath jinja bracket ke undar sno primery laga hai' -->
+                                                    <ul class="action-list">
+                                                      <!-- is end-point ko hum "sno" pass kar rhe hai href ke through -->
+                                                      <!-- is href ko hum app.route se bnayege -->
+                                                        <li><a href="/edit/{{post.sno}}" data-tip="Edit"><i class="fa fa-edit"></i></a></li>
+                                                        <li><a href="/delete/{{post.sno}}" data-tip="Delete"><i class="fa fa-trash"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                           
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer">
+                                   <!--  <div class="row">
+                                        <div class="col col-sm-6 col-xs-6">showing <b>5</b> out of <b>25</b> entries</div>
+                                        <div class="col-sm-5 col-xs-6"0>
+                                            <ul class="pagination hidden-xs pull-right">
+                                                <li><a href="#"><</a></li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">></a></li>
+                                            </ul>
+                                            <ul class="pagination visible-xs pull-right">
+                                                <li><a href="{{prev}}">&larr;<</a></li>
+                                                <li><a href="{{next}}">>&rarr;</a></li>
+                                            </ul>
+
+                                    </div> 
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Pager-->
+                   <!--  <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div> -->
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+{% endblock %}
+        <!-- Footer-->
+        
