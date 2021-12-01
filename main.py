@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect
-from flask import session
+from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
@@ -8,6 +7,7 @@ import os
 #direct import nhi ho rha hai secure_filename to utils se ho gya
 from werkzeug.utils import secure_filename
 import math
+from flask import flash
 
 with open("config.json", "r") as c:
     params = json.load(c)["params"]
@@ -218,6 +218,11 @@ def contact():
             recipients=[params['gmail-username']],
             body= message + "\n"+ phone
         )
+        # flash messages start----
+        category = ["success"]
+        flash("Thanks for submitting your details. We will get back to you soon", category[0] )
+
+        #ends flash msg---------------
     return render_template("contact.html", params=params)
 
 if __name__ == '__main__':
